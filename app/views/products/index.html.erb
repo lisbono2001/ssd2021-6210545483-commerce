@@ -1,0 +1,10 @@
+<h1>Welcome to Urn Online Shopping!</h1>
+<p>Find me in app/views/products/index.html.erb</p>
+
+<% @products.each do |product| %>
+    <li>
+        <a href="/product/<%= product.id %>">
+        <%= product.title %>
+        </a>
+    </li>
+<% end %>
