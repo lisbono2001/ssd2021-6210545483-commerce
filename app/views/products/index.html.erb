@@ -8,6 +8,8 @@
     <tr>
         <th>Products</th>
 
+        <th>Categories</th>
+
         <th>Price</th>
 
         <th>Stock</th>
@@ -18,6 +20,8 @@
         <th>
             <%= link_to product.name, product %>
         </th>
+
+        <th> <%= product.categories.map(&:name).join(',') %></th>
 
         <th>
             <%= product.price %>

@@ -7,7 +7,7 @@
       <tr>
         <td><h5><%= user.email %></h5></td>
         <td><h5><%= link_to 'Edit', edit_user_path(user) %><h5></td>
-        <td><h5><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %><h5></td>
+        <td><h5><%= link_to 'Delete Account', user, method: :delete, data: { confirm: 'Are you sure?' } %><h5></td>
       </tr>
     <% end %>
 </table>

@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
   get "/myaccount", to: "users#myindex"
+
+  resources :categories
 end

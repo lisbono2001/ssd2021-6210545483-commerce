@@ -16,6 +16,11 @@
   </div>
 
   <div>
+    <%= form.label :categories %>
+    <%= form.collection_select :category_ids, Category.order(:name), :id, :name, {}, class:"form-control", multiple: true    %>
+  </div>
+
+  <div>
     <%= form.label :price%><br>
     <%= form.number_field :price, :value => 0 %><br>
     <% product.errors.full_messages_for(:price).each do |message| %>
