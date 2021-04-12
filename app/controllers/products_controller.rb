@@ -58,8 +58,9 @@ class ProductsController < ApplicationController
     data = params[:csv_file].read.split("\n")
     data.each do |line|
       attr = line.split(",").map(&:strip)
-      Product.create name: attr[0], description: attr[1], price: attr[2], stock: attr[3], owner: current_user.email
+      Product.create name: attr[0], description: attr[1], price: attr[2], stock: attr[3], status: "public", owner: current_user.email
     end
+    redirect_to root_path 
   end
 
   private
@@ -81,7 +82,7 @@ class ProductsController < ApplicationController
 
   def generate_csv(products)
     products.map do |product|
-      [product.name, product.description,product.price, product.stock, product.status, product.created_at.to_date, product.updated_at.to_date].join(',')
+      [product.name, product.description,product.price, product.stock, product.status].join(',')
     end.join("\n")
   end
 end
