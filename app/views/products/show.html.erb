@@ -2,13 +2,13 @@
 
 <p><%= @product.description %></p>
 
-<p><%= @product.price %></p>
+<p>price : <%= @product.price %></p>
 
 <p>left : <%= @product.stock %></p>
 
 <p>sold : <%= @product.sold %></p>
 
-<%= link_to "Back to Products", '/products' %>
+<p>seller : <%= @product.owner %></p>
 
 <ul>
   <li><%= link_to "Edit", edit_product_path(@product) %></li>
@@ -21,6 +21,7 @@
 <h2>Reviews</h2>
     <%= render @product.reviews %>
 
-
-<h2>Add a review:</h2>
+<h5>Add a review:</h5>
     <%= render 'reviews/form' %>
+
+<%= link_to "Back to Products", '/products' %>

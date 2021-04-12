@@ -1,12 +1,10 @@
-<h1>Welcome to Urn Shopping!</h1>
-
-<h3>Our shop has <%= Product.public_count %> products for sale! </h3>
+<h3>Your shop has <%= Product.public_count %> products for sale! </h3>
 
 <p id="notice"><%= notice %></p>
 
 <table>
     <tr>
-        <th>Products</th>
+        <th>Product</th>
     </tr>
   <% @products.each do |product| %>
     <tr>
@@ -19,8 +17,6 @@
         <th><%= link_to "Delete", product_path(product),
                   method: :delete,
                   data: { confirm: "Delete product '#{product.name}' ?" } %></th>
-
-        <th><%= link_to "Add to cart", product %></th>
     </tr>
   <% end %>
 </table>

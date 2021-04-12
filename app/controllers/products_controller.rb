@@ -1,13 +1,18 @@
 class ProductsController < ApplicationController
 
-  http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
+  before_action :authorized, except: [ :index, :show ]
 
   def index
-    @products = Product.all.where(status: "public")
+    @products = Product.all
+    # @products = Product.all.where(status: "public")
   end
 
   def show
     @product = Product.find(params[:id])
+  end
+
+  def show_my
+    @product = Product.all.where(owner: current_user.email)
   end
 
   def new
@@ -47,6 +52,19 @@ class ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit(:name, :description, :price, :status)
+      params.require(:product).permit(:name, :description, :price, :stock, :owner, :status)
     end
+
+  def current_user
+    User.find_by(id: session[:user_id])
+  end
+
+  def logged_in?
+    !current_user.nil?
+  end
+
+  def authorized
+    redirect_to "/products" unless logged_in?
+  end
+  
 end

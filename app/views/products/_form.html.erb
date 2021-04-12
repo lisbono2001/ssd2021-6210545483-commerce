@@ -16,11 +16,23 @@
   </div>
 
   <div>
-    <%= form.label :price %><br>
-    <%= form.number_field :price %><br>
+    <%= form.label :price%><br>
+    <%= form.number_field :price, :value => 0 %><br>
     <% product.errors.full_messages_for(:price).each do |message| %>
       <div><%= message %></div>
     <% end %>
+  </div>
+
+  <div>
+    <%= form.label :stock %><br>
+    <%= form.number_field :stock, :value => 1 %><br>
+    <% product.errors.full_messages_for(:stock).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :owner, :value => current_user.email %><br>
   </div>
 
   <div>
