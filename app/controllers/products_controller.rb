@@ -58,9 +58,8 @@ class ProductsController < ApplicationController
     data = params[:csv_file].read.split("\n")
     data.each do |line|
       attr = line.split(",").map(&:strip)
-      Product.create name: attr[0], description: attr[1], stock: attr[2], owner: attr[3]
+      Product.create name: attr[0], description: attr[1], price: attr[2], stock: attr[3], owner: current_user.email
     end
-    redirect_to products_path
   end
 
   private
