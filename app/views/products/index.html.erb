@@ -14,21 +14,25 @@
     </tr>
   <% @products.each do |product| %>
     <tr>
-        <th><% unless product.archived? %>
+        <% unless product.archived? %>
+        <th>
             <%= link_to product.name, product %>
-        <% end %></th>
+        </th>
 
-        <th><% unless product.archived? %>
+        <th>
             <%= product.price %>
-        <% end %></th>
+        </th>
 
-        <th><% unless product.archived? %>
+        <th>
             <%= product.stock %>
-        <% end %></th>
+        </th>
+        <% end %>
 
         <th><%= link_to "Add to cart", product %></th>
     </tr>
   <% end %>
 </table>
+
+<%= link_to 'Download CSV File ', products_path(format: :csv) %>
 
 <p> Go to 'My Products' to add your new product! </p>

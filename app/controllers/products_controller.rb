@@ -4,6 +4,10 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    respond_to do |format|
+      format.html
+      format.csv {send_data generate_csv(Product.all), file_name: 'products.csv'}
+    end
     # @products = Product.all.where(status: "public")
   end
 
@@ -66,5 +70,10 @@ class ProductsController < ApplicationController
   def authorized
     redirect_to "/login" unless logged_in?
   end
-  
+
+  def generate_csv(products)
+    products.map do |product|
+      [product.name, product.description,product.price, product.stock, product.status, product.created_at.to_date, product.updated_at.to_date].join(',')
+    end.join("\n")
+  end
 end

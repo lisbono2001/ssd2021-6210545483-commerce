@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User</h1>
+
+<table class="table">
+    <% @users.each do |user| %>
+      <tr>
+        <td><h5><%= user.email %></h5></td>
+        <td><h5><%= link_to 'Edit', edit_user_path(user) %><h5></td>
+        <td><h5><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %><h5></td>
+      </tr>
+    <% end %>
+</table>
+
+<br>
