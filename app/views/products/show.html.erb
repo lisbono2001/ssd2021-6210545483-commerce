@@ -4,7 +4,9 @@
 
 <p><%= @product.price %></p>
 
-<p><%= @product.sold %></p>
+<p>left : <%= @product.stock %></p>
+
+<p>sold : <%= @product.sold %></p>
 
 <%= link_to "Back to Products", '/products' %>
 
@@ -16,7 +18,7 @@
                   data: { confirm: "Delete product '#{@product.name}' ?" } %></li>
 </ul>
 
-<h2>Comments</h2>
+<h2>Reviews</h2>
     <%= render @product.reviews %>
 
 
