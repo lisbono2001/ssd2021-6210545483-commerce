@@ -42,3 +42,8 @@
 </table>
 
 <h3><%= link_to "New Product", new_product_path %></h3>
+
+<%= form_tag products_csv_upload_path , multipart: true  do  %>
+  <%= file_field_tag :csv_file  %>
+  <%= submit_tag :submit  %>
+<% end %>

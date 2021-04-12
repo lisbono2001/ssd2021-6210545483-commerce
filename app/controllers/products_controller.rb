@@ -54,6 +54,15 @@ class ProductsController < ApplicationController
     redirect_to root_path
   end
 
+  def csv_upload
+    data = params[:csv_file].read.split("\n")
+    data.each do |line|
+      attr = line.split(",").map(&:strip)
+      Product.create name: attr[0], description: attr[1], stock: attr[2], owner: attr[3]
+    end
+    redirect_to products_path
+  end
+
   private
     def product_params
       params.require(:product).permit(:name, :description, :price, :stock, :owner, :status, :category_ids=>[])

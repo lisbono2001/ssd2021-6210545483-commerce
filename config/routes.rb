@@ -23,4 +23,8 @@ Rails.application.routes.draw do
   get "/myaccount", to: "users#myindex"
 
   resources :categories
+
+  namespace :products do
+    post 'csv_upload'
+  end
 end
