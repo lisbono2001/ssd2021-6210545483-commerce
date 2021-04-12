@@ -3,12 +3,11 @@ class ProductsController < ApplicationController
   before_action :authorized, except: [ :index, :show ]
 
   def index
-    @products = Product.all
+    @products = Product.all.where(status: "public")
     respond_to do |format|
       format.html
       format.csv {send_data generate_csv(Product.all), file_name: 'products.csv'}
     end
-    # @products = Product.all.where(status: "public")
   end
 
   def show
@@ -46,8 +45,7 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
-
-  def destroy
+ 
     @product = Product.find(params[:id])
     @product.destroy
 
@@ -60,7 +58,7 @@ class ProductsController < ApplicationController
       attr = line.split(",").map(&:strip)
       Product.create name: attr[0], description: attr[1], price: attr[2], stock: attr[3], status: "public", owner: current_user.email
     end
-    redirect_to root_path 
+    redirect_to root_path
   end
 
   private
