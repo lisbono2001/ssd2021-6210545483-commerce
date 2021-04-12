@@ -12,9 +12,6 @@
         </div>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">My Cart <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
         <div class="nav-link">
             <%= link_to "Categories", "/categories" %>
         </div>
@@ -24,15 +21,39 @@
             <%= link_to "Admin", "/users" %>
         </div>
       </li>
+      <li class="nav-item active">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cart">
+          My Cart 
+        </button>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <% if current_user %>
         Logged in as <%= link_to current_user.email, "/myaccount" %>.</a>
         <%= link_to "Log Out", logout_path %>
       <% else %>
-        <%= link_to "Sign Up", signup_path %> or 
+        <%= link_to "Sign Up", signup_path %>/
         <%= link_to "Log In", login_path %>
       <% end %>
     </form>
   </div>
 </nav>
+
+<div class="modal fade" id="Cart" tabindex="-1" role="dialog" aria-labelledby="CartTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalTitle">Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>TBA.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

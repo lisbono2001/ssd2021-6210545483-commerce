@@ -6,6 +6,8 @@ class ReviewsController < ApplicationController
       redirect_to product_path(@product)
     end
 
+    http_basic_authenticate_with name: "admin", password: "88998899", except: [:create]
+
     def destroy
       @product = Product.find(params[:product_id])
       @review = @product.reviews.find(params[:id])
@@ -15,6 +17,6 @@ class ReviewsController < ApplicationController
   
     private
       def review_params
-        params.require(:review).permit(:reviewer, :body, :status)
+        params.require(:review).permit(:reviewer, :body)
       end
 end
