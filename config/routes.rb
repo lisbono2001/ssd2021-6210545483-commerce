@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "products#index"
 
   get "/products", to: "products#index"
+  get "/myproducts", to: "products#myindex"
 
   resources :products do
     resources :reviews

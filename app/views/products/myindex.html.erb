@@ -1,15 +1,29 @@
-<h3>Your shop has <%= Product.public_count %> products for sale! </h3>
+<h1>My Shop</h1>
+
+<h3>My shop has <%= @products.public_count %> products</h3>
 
 <p id="notice"><%= notice %></p>
 
-<table>
+<table class="table">
     <tr>
-        <th>Product</th>
+        <th>Products</th>
+
+        <th>Price</th>
+
+        <th>Stock</th>
     </tr>
   <% @products.each do |product| %>
     <tr>
         <th><% unless product.archived? %>
             <%= link_to product.name, product %>
+        <% end %></th>
+
+        <th><% unless product.archived? %>
+            <%= product.price %>
+        <% end %></th>
+
+        <th><% unless product.archived? %>
+            <%= product.stock %>
         <% end %></th>
     
         <th><%= link_to "Edit", edit_product_path(product) %></th>

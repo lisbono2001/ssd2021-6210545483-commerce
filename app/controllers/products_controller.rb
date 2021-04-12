@@ -11,8 +11,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def show_my
-    @product = Product.all.where(owner: current_user.email)
+  def myindex
+    @products = Product.all.where(owner: current_user.email)
   end
 
   def new
@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
   end
 
   def authorized
-    redirect_to "/products" unless logged_in?
+    redirect_to "/login" unless logged_in?
   end
   
 end

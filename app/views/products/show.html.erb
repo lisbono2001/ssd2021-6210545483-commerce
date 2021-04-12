@@ -1,6 +1,6 @@
 <h1><%= @product.name %></h1>
 
-<p><%= @product.description %></p>
+<p>Description : <%= @product.description %></p>
 
 <p>price : <%= @product.price %></p>
 
@@ -9,14 +9,6 @@
 <p>sold : <%= @product.sold %></p>
 
 <p>seller : <%= @product.owner %></p>
-
-<ul>
-  <li><%= link_to "Edit", edit_product_path(@product) %></li>
-
-  <li><%= link_to "Delete", product_path(@product),
-                  method: :delete,
-                  data: { confirm: "Delete product '#{@product.name}' ?" } %></li>
-</ul>
 
 <h2>Reviews</h2>
     <%= render @product.reviews %>

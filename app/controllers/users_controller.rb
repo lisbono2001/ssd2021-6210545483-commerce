@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
+  http_basic_authenticate_with name: "admin", password: "88998899", except: [:new, :create]
+
   # GET /users or /users.json
   def index
     @users = User.all
