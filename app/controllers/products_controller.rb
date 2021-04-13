@@ -1,3 +1,4 @@
+
 class ProductsController < ApplicationController
 
   before_action :authorized, except: [ :index, :show ]
@@ -45,7 +46,8 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
- 
+
+  def destroy
     @product = Product.find(params[:id])
     @product.destroy
 
@@ -58,13 +60,7 @@ class ProductsController < ApplicationController
       attr = line.split(",").map(&:strip)
       Product.create name: attr[0], description: attr[1], price: attr[2], stock: attr[3], status: "public", owner: current_user.email
     end
-    redirect_to root_path
-  end
-
-  def generate_csv(products)
-    products.map do |product|
-      [product.name, product.description,product.price, product.stock, product.status].join(',')
-    end.join("\n")
+    redirect_to root_path 
   end
 
   private
@@ -82,5 +78,11 @@ class ProductsController < ApplicationController
 
   def authorized
     redirect_to "/login" unless logged_in?
+  end
+
+  def generate_csv(products)
+    products.map do |product|
+      [product.name, product.description,product.price, product.stock, product.status].join(',')
+    end.join("\n")
   end
 end
