@@ -61,6 +61,12 @@ class ProductsController < ApplicationController
     redirect_to root_path
   end
 
+  def generate_csv(products)
+    products.map do |product|
+      [product.name, product.description,product.price, product.stock, product.status].join(',')
+    end.join("\n")
+  end
+
   private
     def product_params
       params.require(:product).permit(:name, :description, :price, :stock, :owner, :status, :category_ids=>[])
@@ -76,11 +82,5 @@ class ProductsController < ApplicationController
 
   def authorized
     redirect_to "/login" unless logged_in?
-  end
-
-  def generate_csv(products)
-    products.map do |product|
-      [product.name, product.description,product.price, product.stock, product.status].join(',')
-    end.join("\n")
   end
 end
