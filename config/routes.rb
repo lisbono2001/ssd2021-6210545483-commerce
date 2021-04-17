@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       delete :delete_image_attachment
     end
   end
+  namespace :products do
+    post 'csv_upload'
+  end
 
   resources :categories
   resources :users
@@ -19,9 +22,6 @@ Rails.application.routes.draw do
   get "/myproducts", to: "products#myindex"
   get "/myaccount", to: "users#myindex"
 
-  namespace :products do
-    post 'csv_upload'
-  end
-
-  get "/admin", to: "users#index"
+  get "/admins/products", to: "products#admins"
+  get "/admins/users", to: "users#index"
 end

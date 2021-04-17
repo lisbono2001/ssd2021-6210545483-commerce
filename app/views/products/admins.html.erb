@@ -1,6 +1,6 @@
-<h1>Welcome to Urn Shopping!</h1>
+<h1>All Shops</h1>
 
-<h3>Our shop have <%= Product.public_count %> products for sale! </h3>
+<h3>All shops have <%= @products.public_count %> products</h3>
 
 <p id="notice"><%= notice %></p>
 
@@ -41,14 +41,21 @@
             <%= product.stock %>
         </th>
         <% end %>
+    
+        <th><%= link_to "Edit", edit_product_path(product) %></th>
 
-        <th><%= link_to "Add to cart", product %></th>
+        <th><%= link_to "Delete", product_path(product),
+                  method: :delete,
+                  data: { confirm: "Delete product '#{product.name}' ?" } %></th>
     </tr>
   <% end %>
 </table>
 
-<%= link_to 'Download CSV File ', products_path(format: :csv) %>
+<h3><%= link_to "New Product", new_product_path %></h3>
+<h5> Or </h5>
+<h3>Add products via CSV file</h3>
 
-<p> Go to 'My Products' to add your new product! </p>
-<p> For TA : For managing users use ID:admin Pass:88998899 in admin page in nav bar</p>
-<p> For TA : Authentication of users link with product TBA</p>
+<%= form_tag products_csv_upload_path , multipart: true  do  %>
+  <%= file_field_tag :csv_file  %>
+  <%= submit_tag :submit  %>
+<% end %>

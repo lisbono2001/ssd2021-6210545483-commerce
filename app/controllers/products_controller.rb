@@ -15,10 +15,12 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def admins
+    @products = Product.all
+  end
+
   def myindex
     @products = Product.all.where(owner: current_user.email)
-
-    @products = Product.all
   end
 
   def new
