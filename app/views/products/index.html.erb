@@ -8,6 +8,8 @@
     <tr>
         <th>Products</th>
 
+        <th>Image</th>
+
         <th>Categories</th>
 
         <th>Price</th>
@@ -19,6 +21,12 @@
         <% unless product.archived? %>
         <th>
             <%= link_to product.name, product %>
+        </th>
+
+        <th>
+            <div style="width:100px; height:auto">
+                <%= link_to image_tag(product.image, style:"width:100%") , product%>
+            </div>
         </th>
 
         <th> <%= product.categories.map(&:name).join(',') %></th>
