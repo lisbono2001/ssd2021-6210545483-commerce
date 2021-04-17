@@ -17,6 +17,8 @@ class ProductsController < ApplicationController
 
   def myindex
     @products = Product.all.where(owner: current_user.email)
+
+    @products = Product.all
   end
 
   def new
