@@ -63,11 +63,6 @@ class ProductsController < ApplicationController
     redirect_to root_path 
   end
 
-  private
-    def product_params
-      params.require(:product).permit(:name, :description, :price, :stock, :owner, :status, :image, :category_ids=>[])
-    end
-
   def current_user
     User.find_by(id: session[:user_id])
   end
@@ -85,4 +80,15 @@ class ProductsController < ApplicationController
       [product.name, product.description,product.price, product.stock, product.status].join(',')
     end.join("\n")
   end
+
+  def delete_image_attachment
+    @space_image = ActiveStorage::Attachment.find(params[:id])
+    @space_image.purge
+    redirect_back(fallback_location: request.referer)
+  end
+
+  private
+    def product_params
+      params.require(:product).permit(:name, :description, :price, :stock, :owner, :status, :image, :category_ids=>[], :support_image=>[])
+    end
 end

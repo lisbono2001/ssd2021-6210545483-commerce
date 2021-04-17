@@ -1,8 +1,10 @@
 <h1><%= @product.name %></h1>
 
-<div style="width:300px; height:auto">
-    <%= image_tag(@product.image, style:"width:100%") %>
-</div>
+<% if @product.image.attached? %>
+    <div style="width:300px; height:auto">
+        <%= link_to image_tag(@product.image, style:"width:100%") , @product%>
+    </div>
+<% end %>
 
 <p>Description : <%= @product.description %></p>
 
@@ -13,6 +15,14 @@
 <p>sold : <%= @product.sold %></p>
 
 <p>seller : <%= @product.owner %></p>
+
+<% if @product.support_image.attached? %>
+    <% @product.support_image.each do |support_image| %>
+        <div style="width:100px; height:auto">
+            <%= image_tag(support_image, style:"width:100%") %>
+        </div>
+    <% end %>
+<% end %>
 
 <h2>Reviews</h2>
     <%= render @product.reviews %>

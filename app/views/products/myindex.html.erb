@@ -23,13 +23,13 @@
             <%= link_to product.name, product %>
         </th>
 
-        <% if product.image.attached? %>
         <th>
+            <% if product.image.attached? %>
             <div style="width:100px; height:auto">
                 <%= link_to image_tag(product.image, style:"width:100%") , product%>
             </div>
+            <% end %>
         </th>
-        <% end %>
 
         <th> <%= product.categories.map(&:name).join(',') %></th>
 

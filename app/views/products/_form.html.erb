@@ -1,11 +1,20 @@
 <%= form_with model: product do |form| %>
   <div>
-    <%= form.label :name%><br>
+    <%= form.label :name%>
     <%= form.text_field :name %>
     <% product.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
+
+  <% if product.image.attached? %>
+  <div style="width:300px; height:auto">
+      <%= link_to image_tag(product.image, style:"width:100%") , product%>
+  </div>
+  <%= link_to 'Remove', delete_image_attachment_product_url(product.image.id),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+  <% end %>
 
   <div>
     <%= form.label :description %><br>
@@ -41,14 +50,47 @@
   </div>
 
   <div>
-    <%= form.label :status %><br>
+    <%= form.label :status %>
     <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
   </div>
 
-  <div>
+  <hr>
+
+  <% if product.image.attached? %>
+    <h5>Change Main Image</h5>
     <%= form.label :image %>
     <%= form.file_field :image %>
-  </div>
+    <h5>Include Image?</h5>
+
+  <% else %>
+    <h5>Add Main Image</h5>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  <% end %>
+
+  <hr>
+
+  <% if product.support_image.attached? %>
+    <h5> Support Images </h5>
+    <% @product.support_image.each do |support_image| %>
+        <div style="width:100px; height:auto">
+            <%= image_tag(support_image, style:"width:100%") %>
+        </div>
+        <%= link_to 'Remove', delete_image_attachment_product_url(support_image.id),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+    <% end %>
+
+    <h5>Change Support Images</h5>
+    <%= form.label :support_image %>
+    <%= form.file_field :support_image ,multiple: true%>
+  <% else %>
+    <h5>Add Support Images</h5>
+    <%= form.label :support_image %>
+    <%= form.file_field :support_image ,multiple: true%>
+  <% end %>
+
+  <hr>
 
   <div>
     <%= form.submit %>
