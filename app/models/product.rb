@@ -11,5 +11,6 @@ class Product < ApplicationRecord
     validates :description, presence: true, length: { minimum: 15 }
     validates :price, presence: true, numericality: {message: "Price must be possitive value!" ,in: 1..9999}
     validates :stock, presence: true, numericality: { only_integer: true ,message: "Stock must be possitive integer!" , in: 1..9999}
+    validates :image, presence: true
 
 end
