@@ -8,6 +8,8 @@
     <tr>
         <th>Products</th>
 
+        <th>Image</th>
+
         <th>Categories</th>
 
         <th>Price</th>
@@ -19,6 +21,12 @@
         <% unless product.archived? %>
         <th>
             <%= link_to product.name, product %>
+        </th>
+
+        <th>
+            <div style="width:100px; height:auto">
+                <%= link_to image_tag(product.image, style:"width:100%") , product%>
+            </div>
         </th>
 
         <th> <%= product.categories.map(&:name).join(',') %></th>
@@ -42,6 +50,8 @@
 </table>
 
 <h3><%= link_to "New Product", new_product_path %></h3>
+<h5> Or </h5>
+<h3>Add products via CSV file</h3>
 
 <%= form_tag products_csv_upload_path , multipart: true  do  %>
   <%= file_field_tag :csv_file  %>
