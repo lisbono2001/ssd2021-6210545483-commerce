@@ -12,16 +12,19 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :sessions
+  resources :sessions, only: [:create]
 
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  get "/myproducts", to: "products#myindex"
-  get "/myaccount", to: "users#myindex"
+  get "myproducts", to: "products#myindex"
+  get "myaccount", to: "users#myindex"
 
-  resources :users
-  get "/admins/products", to: "admin#products"
-  get "/admins/users", to: "admin#users"
+  scope "/admins" do
+    resources :users
+  end
+  get "admins/users", to: "users#index"
+  get "admins/allproducts", to: "products#allproducts"
+
 end

@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all.where(status: "public")
+
     respond_to do |format|
       format.html
       format.csv {send_data generate_csv(Product.all), file_name: 'products.csv'}
@@ -16,6 +17,15 @@ class ProductsController < ApplicationController
 
   def myindex
     @products = Product.all.where(owner: current_user.email)
+  end
+
+  def allproducts
+    @products = Product.all
+
+    respond_to do |format|
+      format.html
+      format.csv {send_data generate_csv(Product.all), file_name: 'products.csv'}
+    end
   end
 
   def new
