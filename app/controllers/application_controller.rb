@@ -7,4 +7,13 @@ class ApplicationController < ActionController::Base
             @current_user = nil
         end
     end
+
+    helper_method :authorized
+    def logged_in?
+        !current_user.nil?
+      end
+    
+    def authorized
+        redirect_to "/login" unless logged_in?
+    end
 end

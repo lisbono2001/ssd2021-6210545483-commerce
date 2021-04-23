@@ -1,22 +1,19 @@
 class ReviewsController < ApplicationController
+  before_action :set_product, only: %i[ create destroy ]
 
-    def create
-      @product = Product.find(params[:product_id])
-      @review = @product.reviews.create(review_params)
-      redirect_to product_path(@product)
+  def create
+    @review = @product.reviews.create(review_params)
+    redirect_to product_path(@product)
+  end
+
+  def destroy
+    @review = @product.reviews.find(params[:id])
+    @review.destroy
+    redirect_to product_path(@product)
+  end
+
+  private
+    def review_params
+      params.require(:review).permit(:reviewer, :body)
     end
-
-    http_basic_authenticate_with name: "admin", password: "88998899", except: [:create]
-
-    def destroy
-      @product = Product.find(params[:product_id])
-      @review = @product.reviews.find(params[:id])
-      @review.destroy
-      redirect_to product_path(@product)
-    end
-  
-    private
-      def review_params
-        params.require(:review).permit(:reviewer, :body)
-      end
 end
