@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "products#index"
+
   resources :products do
     resources :reviews
     member do
@@ -12,8 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions
 
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
   get "/myproducts", to: "products#myindex"
   get "/myaccount", to: "users#myindex"
 
-  get "/admins/products", to: "products#admins"
-  get "/admins/users", to: "users#index"
+  resources :users
+  get "/admins/products", to: "admin#products"
+  get "/admins/users", to: "admin#users"
 end
