@@ -11,9 +11,22 @@ class ApplicationController < ActionController::Base
     helper_method :authorized
     def logged_in?
         !current_user.nil?
-      end
+    end
     
     def authorized
         redirect_to "/login" unless logged_in?
+    end
+
+    helper_method :admin
+    def checkadmin
+        if current_user
+            redirect_to root_path, notice: "You don't have permission to do that!" unless admin?
+        else
+            redirect_to root_path, notice: "Please login with your admin account"
+        end
+    end
+
+    def admin?
+        current_user.role == "admin"
     end
 end

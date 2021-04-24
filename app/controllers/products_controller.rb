@@ -1,6 +1,7 @@
 
 class ProductsController < ApplicationController
   before_action :authorized, except: [:index, :show]
+  before_action :checkadmin, only: [:allproducts]
 
   def index
     @products = Product.all.where(status: "public")

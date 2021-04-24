@@ -26,6 +26,19 @@
     <%= form.password_field :password_confirmation %>
   </div>
 
+  <%if current_user %> 
+    <% if current_user.role == "admin" %>
+      <div class="field">
+        <%= form.label :role %>
+        <%= form.select :role, ['admin', 'user'], selected: 'user' %>
+      </div>
+    <% end %>
+  <% else %>
+    <div>
+      <%= form.hidden_field :role, :value => "user" %><br>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
