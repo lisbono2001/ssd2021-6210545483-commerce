@@ -29,4 +29,17 @@ class ApplicationController < ActionController::Base
     def admin?
         current_user.role == "admin"
     end
+
+    helper_method :checkpermission
+    def checkadmin
+        if current_user
+            redirect_to root_path, notice: "You don't have permission to do that!" unless admin?
+        else
+            redirect_to root_path, notice: "Please login with your admin account"
+        end
+    end
+
+    def admin?
+        current_user.role == "admin"
+    end
 end

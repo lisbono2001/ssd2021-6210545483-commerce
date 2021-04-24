@@ -56,9 +56,9 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.all.where(owner: current_user.email).find(params[:id])
+    @product = Product.find(params[:id])
     @product.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: "A product deleted"
   end
 
   def csv_upload

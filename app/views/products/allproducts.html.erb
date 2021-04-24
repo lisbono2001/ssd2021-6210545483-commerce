@@ -1,5 +1,4 @@
 <h1>All Shops</h1>
-
 <h3>All shops have <%= @products.public_count %> products</h3>
 
 <p id="notice"><%= notice %></p>
@@ -41,8 +40,6 @@
             <%= product.stock %>
         </th>
         <% end %>
-    
-        <th><%= link_to "Edit", edit_product_path(product) %></th>
 
         <th><%= link_to "Delete", product_path(product),
                   method: :delete,

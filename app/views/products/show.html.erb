@@ -8,6 +8,8 @@
 
 <p>Description : <%= @product.description %></p>
 
+<p>Categories : <%= @product.categories.map(&:name).join(',') %></p>
+
 <p>price : <%= @product.price %></p>
 
 <p>left : <%= @product.stock %></p>

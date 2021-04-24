@@ -4,50 +4,41 @@
 
 <p id="notice"><%= notice %></p>
 
-<table class="table">
-    <tr>
-        <th>Products</th>
-
-        <th>Image</th>
-
-        <th>Categories</th>
-
-        <th>Price</th>
-
-        <th>Stock</th>
-    </tr>
+<div class="flex-container">
   <% @products.each do |product| %>
-    <tr>
-        <% unless product.archived? %>
-        <th>
-            <%= link_to product.name, product %>
-        </th>
-
-        <th>
+    <div class="card" style="width: 300px; margin:10px; display:inline-block;">
+        <div class="card-body">
+            <h4 class="card-title"><%= link_to product.name, product %></h4>
+            <div style="height:200px">
             <% if product.image.attached? %>
-            <div style="width:100px; height:auto">
-                <%= link_to image_tag(product.image, style:"width:100%") , product%>
-            </div>
+                <%= link_to image_tag(product.image, style:"width:200px; height:200px") , product%>
             <% end %>
-        </th>
-
-        <th> <%= product.categories.map(&:name).join(',') %></th>
-
-        <th>
-            <%= product.price %>
-        </th>
-
-        <th>
-            <%= product.stock %>
-        </th>
-        <% end %>
-
-        <th><%= link_to "Add to cart", product %></th>
-    </tr>
+            </div>
+            <p>Categories : <%= product.categories.map(&:name).join(',') %></p>
+            <div class="row">
+                <div class="col-md">
+                    <p>Price : <%=product.price%></p>
+                </div>
+                <div class="col-md">
+                    <p>Stock : <%=product.stock%></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div><%= link_to "Add to cart", product ,class:"btn btn-warning"%></div>
+                </div>
+                <div class="col-md">
+                    <div><%= link_to "More Detail", product ,class:"btn btn-info" %></div>
+                </div>
+            </div>
+        </div>
+    </div>
   <% end %>
-</table>
+</div>
 
-<%= link_to 'Download CSV File ', products_path(format: :csv) %>
-
+<div>
+    <%= link_to 'Download CSV File ', products_path(format: :csv), class: "btn btn-outline-info"%>
+</div>
+</br>
 <p> Go to 'My Products' to add your new product </p>
 <p> For TA : For managing users login with ID:admin Pass:88998899</p>
