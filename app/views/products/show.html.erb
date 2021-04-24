@@ -1,35 +1,51 @@
-<h1><%= @product.name %></h1>
-
-<% if @product.image.attached? %>
-    <div style="width:300px; height:auto">
-        <%= link_to image_tag(@product.image, style:"width:100%") , @product%>
+<div class="container bg-light" style="margin:20px;">
+    <div class="row" style="height:100px;">
+        <div style="padding:20px;"><h1><%= @product.name %></h1></div>
     </div>
-<% end %>
-
-<p>Description : <%= @product.description %></p>
-
-<p>Categories : <%= @product.categories.map(&:name).join(',') %></p>
-
-<p>price : <%= @product.price %></p>
-
-<p>left : <%= @product.stock %></p>
-
-<p>sold : <%= @product.sold %></p>
-
-<p>seller : <%= @product.owner %></p>
-
-<% if @product.support_image.attached? %>
-    <% @product.support_image.each do |support_image| %>
-        <div style="width:100px; height:auto">
-            <%= image_tag(support_image, style:"width:100%") %>
+    <div class="row" style="height:300px">
+        <div class="col" style="height:300px ">
+            <div class="container">
+            <% if @product.image.attached? %>
+                <div style="height:300px; object-fit:contain;">
+                    <%=image_tag(@product.image)%>
+                </div>
+            <% end %>
+            </div>
         </div>
-    <% end %>
-<% end %>
+        <div class="col">
+            <div class="row" style="padding:20px"><h4>sold : <%= @product.sold %></h4></div>
+            <div class="row" style="padding:20px; color:orange"><h1>price : <b><%= @product.price %></b><h1></div>
+            <div class="row" style="padding:20px">left : <%= @product.stock %></div>
+        </div>
+    </div>
+</div>
 
-<h2>Reviews</h2>
-    <%= render @product.reviews %>
+<div class="container bg-warning" style="height:80px; margin:20px;">
+    <div style="padding:25px "><h4>Seller : <%= @product.owner %></h4></div>
+</div>
 
-<h5>Add a review:</h5>
-    <%= render 'reviews/form' %>
+<div class="container bg-light" style="margin:20px;">
+    <div style="padding:30px "> Categories : <%= @product.categories.map(&:name).join(',') %></div>
+    <div style="padding:30px "> Description : <%= @product.description %></div>
+    <div style="padding:30px ">
+        <% if @product.support_image.attached? %>
+            <% @product.support_image.each do |support_image| %>
+                <div style="width:100px; height:100px; object-fit: contain;">
+                    <%= image_tag(support_image, style:"width:100%") %>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
 
-<%= link_to "Back to Products", '/products' %>
+<div class="container bg-light" style="margin:20px; padding:20px">
+    <h2>Reviews</h2>
+        <%= render @product.reviews %>
+
+    <h5>Add a review:</h5>
+        <%= render 'reviews/form' %>
+</div>
+
+<div class="container" style="margin:20px;">
+<%= link_to "Back to Products", '/products', class:"btn btn-outline-info"%>
+</div>
