@@ -1,7 +1,6 @@
 
 class ProductsController < ApplicationController
-  before_action :authorized, except: [:index, :show, :admins]
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :authorized, except: [:index, :show]
 
   def index
     @products = Product.all.where(status: "public")
@@ -13,6 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
   end
 
   def myindex
@@ -42,10 +42,11 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @product = Product.all.where(owner: current_user.email).find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
+    @product = Product.all.where(owner: current_user.email).find(params[:id])
     if @product.update(product_params)
       redirect_to @product
     else
@@ -54,6 +55,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    @product = Product.all.where(owner: current_user.email).find(params[:id])
     @product.destroy
     redirect_to root_path
   end
