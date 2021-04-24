@@ -2,7 +2,7 @@
     <div class="row" style="height:100px;">
         <div style="padding:20px;"><h1><%= @product.name %></h1></div>
     </div>
-    <div class="row" style="height:300px">
+    <div class="row" style="height:340px">
         <div class="col" style="height:300px ">
             <div class="container">
             <% if @product.image.attached? %>
@@ -13,9 +13,10 @@
             </div>
         </div>
         <div class="col">
-            <div class="row" style="padding:20px"><h4>sold : <%= @product.sold %></h4></div>
+            <div class="row" style="padding:20px;"><h4>sold : <%= @product.sold %></h4></div>
             <div class="row" style="padding:20px; color:orange"><h1>price : <b><%= @product.price %></b><h1></div>
-            <div class="row" style="padding:20px">left : <%= @product.stock %></div>
+            <div class="row" style="padding:20px;">left : <%= @product.stock %></div>
+            <div class="row" style="padding:20px;"> <div class="btn btn-success"><h5>Add to Cart</h5></div></div>
         </div>
     </div>
 </div>
@@ -27,7 +28,7 @@
 <div class="container bg-light" style="margin:20px;">
     <div style="padding:30px "> Categories : <%= @product.categories.map(&:name).join(',') %></div>
     <div style="padding:30px "> Description : <%= @product.description %></div>
-    <div style="padding:30px ">
+    <div style="padding:30px "> More Images :
         <% if @product.support_image.attached? %>
             <% @product.support_image.each do |support_image| %>
                 <div style="width:100px; height:100px; object-fit: contain;">
