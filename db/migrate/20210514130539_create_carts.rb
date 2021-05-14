@@ -1,5 +1,8 @@
-class AddQuantityToLineItems < ActiveRecord::Migration[5.1]
+class CreateCarts < ActiveRecord::Migration[6.1]
   def change
-    add_column :line_items, :quantity, :integer, default: 1
+    create_table :carts do |t|
+
+      t.timestamps
+    end
   end
 end
