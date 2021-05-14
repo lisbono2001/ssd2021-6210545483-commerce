@@ -16,7 +16,7 @@
             <div class="row" style="padding:20px;"><h4>sold : <%= @product.sold %></h4></div>
             <div class="row" style="padding:20px; color:orange"><h1>price : <b><%= @product.price %></b><h1></div>
             <div class="row" style="padding:20px;">left : <%= @product.stock %></div>
-            <div class="row" style="padding:20px;"> <div class="btn btn-success"><h5>Add to Cart</h5></div></div>
+            <div class="row" style="padding:20px;"> <%= button_to 'Add to Cart', line_items_path(product_id: @product), class: 'btn btn-success' %></div>
         </div>
     </div>
 </div>

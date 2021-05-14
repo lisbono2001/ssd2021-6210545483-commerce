@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
     helper_method :current_user
+    include CurrentCart
+    before_action :set_cart
+
     def current_user
         if session[:user_id]
             @current_user ||= User.find(session[:user_id])
