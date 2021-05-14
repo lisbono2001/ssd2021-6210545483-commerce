@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :line_items
   resources :carts
   root "products#index"
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :sessions, only: [:create]
+  
+  resources :orders
+  get '/orders/new_order', to: 'orders#new', as: 'orders_new'
 
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'

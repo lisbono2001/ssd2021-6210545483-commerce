@@ -25,7 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-md">
-                    <div><%= link_to "Add to cart", product ,class:"btn btn-warning"%></div>
+                    <div><%= link_to 'Buy Now', new_order_path(product_id: product), class: 'btn btn-warning' %></div>
                 </div>
                 <div class="col-md">
                     <div><%= link_to "More Detail", product ,class:"btn btn-info" %></div>
@@ -42,3 +42,5 @@
 </br>
 <p> Go to 'My Products' to add your new product </p>
 <p> For TA : For managing users login with ID:admin Pass:88998899</p>
+<p> Managing orders can be found in 'Admin' page </p>
+<p> Ordering with items in cart, TBA </p>
